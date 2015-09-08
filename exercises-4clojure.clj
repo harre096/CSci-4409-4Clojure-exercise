@@ -137,9 +137,11 @@
 
 ; What I pasted in the box:
 
+(fn [operator] #(operator %2 %1))
 
-
-; 
+;The outer fn would be evaluated first, then flop the params on the inner:
+; (= true (((fn [operator] #(operator %2 %1)) >) 7 8))
+; (= true ((               #(    >    %2 %1))  ) 7 8))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -147,9 +149,11 @@
 
 ; What I pasted in the box:
 
+4
 
-
-; 
+; Contains looks at keys. For maps, things makes sense. 
+;For vectors/java arrays, it still looks at keys NOT VALUES. Huh.
+;Doesn't work for lists at all( throws expeption since Clojure >=1.5 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
