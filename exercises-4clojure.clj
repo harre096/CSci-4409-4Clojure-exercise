@@ -127,9 +127,9 @@
 
 ; What I pasted in the box:
 
+(fn rot [shift veck] (flatten (cons (subvec veck (mod shift (+ 1 (count veck))) (count veck)) (subvec veck 0 (+ 1 (mod (count veck) (mod shift (+ 1 (count veck))) )) ))))
 
-
-; 
+; This gets the first one, but seem all too complicated.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
