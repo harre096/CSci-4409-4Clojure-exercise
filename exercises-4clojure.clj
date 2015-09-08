@@ -63,19 +63,19 @@
 ;;;;;(subract once because index is base zero, then again to get the penultimate element)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;////////////////////////////////////////////////////////////////////////////////////////////////////
+
 ;;;Problem 21 - Nth Element
 
 ; What I pasted in the box:
 
-(fn [seq n](
-  (if (= n 0)
-     (first seq)
-     (getNth (rest seq) (- n 1))
-))
+(fn walkToN [coll index]
+  (if (= 0 index)
+    (first coll)
+    (walkToN (rest coll) (- index 1)) ))
 
-; needs work
-;;////////////////////////////////////////////////////////////////////////////////////////////////////
+; Remove things from the collection until the correct item is easily accseeible:
+;  -base case: the first thing is what we want
+;  -continue case: Throw the first thing away, decrement the index. We are thus getting closer to base case.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
