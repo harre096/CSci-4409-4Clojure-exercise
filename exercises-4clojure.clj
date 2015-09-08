@@ -18,9 +18,6 @@
 
 ; Two ways of using the same hashmap. 20 is the value on the key ":b":
 
-(= __ ((hash-map :a 10, :b 20, :c 30) :b))
-(= __ (:b {:a 10, :b 20, :c 30}))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;Problem 16 - Hello World
@@ -29,7 +26,7 @@
 
 #(str "Hello, " % "!")
 
-;I used short notation to write an function that parses the strings togather. 
+;I used short notation to write an function that parses the strings together. 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -49,7 +46,8 @@
 
 '(6 7)
 
-; we filtered through the list keeping only numbers greater that five: #(> % 5), thus we only have the bigger numbers left in the new list
+; we filtered through the list keeping only numbers greater that five: #(> % 5), 
+;thus we only have the bigger numbers left in the new list
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -57,9 +55,12 @@
 
 ; What I pasted in the box:
 
+(fn [x] (nth x (- (count x) 2)))
 
-
-; 
+; Pass in a sequence, naming it x. Use the nth function:
+;;;for the first parameter, pass in the sequence x
+;;;for the second parameter, find the correct index by counting the items in x and then subracting two.
+;;;;;(subract once because index is base zero, then again to get the penultimate element)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -67,9 +68,33 @@
 
 ; What I pasted in the box:
 
-
+(fn [seq n](
+  (if (= n 0)
+     (first seq)
+     (getNth (rest seq) (- n 1))
+))
 
 ; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -77,9 +102,25 @@
 
 ; What I pasted in the box:
 
-
+(fn rev [coll]
+  (if (empty? (rest coll)) 
+      (cons (first coll))
+      (cons  rev(rest coll) (first coll)))
+)
 
 ; 
+
+
+
+
+
+
+
+
+
+
+
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -87,9 +128,11 @@
 
 ; What I pasted in the box:
 
+filter #(= (mod % 2) 1)
 
-
-; 
+; filter the sequence using mod2. When dividing by 2, there will be:
+;zero remaining if num is even
+;one remaining if num is odd (keep these!)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -97,19 +140,27 @@
 
 ; What I pasted in the box:
 
+"ABC"
 
-
-; 
+;Use the regex to find capital letters (or groups of them)
+;putting the results in an array of strings. 
+;apply str turns them into a single string of all CAPS, ie. "ABC"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;;Problem 40 - Interpose a Seq
+;;;Problem 40 - Interpose a 
 
 ; What I pasted in the box:
 
+(fn mix [addin coll]
+   (if (empty? (rest coll))
+     (cons (first coll) nil)
+     (cons (first coll) (cons addin (mix addin (rest coll)))))
+)
 
-
-; 
+; Build a list by cons-ing pieces together two at a time.
+;  -Normal case: cons the first and the addin, recurse on rest
+;  -End case: cons the first, close the list
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
