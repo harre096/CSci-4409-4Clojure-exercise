@@ -133,22 +133,33 @@ filter #(= (mod % 2) 1)
 ;;;Problem 43 - Reverse Interleave
 
 ; What I pasted in the box:
-(fn [coll numb] (partition numb coll))
 
+(fn [coll numb]
+  (map #(take-nth numb (drop % coll)) (range numb))
+)
 
-; needs work. Things are grouped, but not correctly
-;;////////////////////////////////////////////////////////////////////////////////////////////////////
+; We talked about these in office hours/class. 
+;This solution uses take-nth to grab the nth term from what is effectively numb vectors.
+; In test one, our numb is 2 and we map against:
+;   [1 2 3 4 5 6] to get [1 3 5] and then chop off the front term
+;   [2 3 4 5 6] to get [2 4 6]
+; repeat as necessary numb times for other sets.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;////////////////////////////////////////////////////////////////////////////////////////////////////
+
 ;;;Problem 44 - Rotate Sequence
 
 ; What I pasted in the box:
 
-(fn rot [shift veck] (flatten (cons (subvec veck (mod shift (+ 1 (count veck))) (count veck)) (subvec veck 0 (+ 1 (mod (count veck) (mod shift (+ 1 (count veck))) )) ))))
+  (fn [rawShift coll]
+    (let [size (count coll) shift (mod rawShift size)]
+     (concat 
+      (drop shift coll)
+      (take shift coll))
+    ))
 
-; needs work. This gets the first one, but seem all too complicated.
-;;////////////////////////////////////////////////////////////////////////////////////////////////////
+; We talked about these in office hours/class. With drop and take, it is way easier.  
+;Just cons the drop and take together using mod to hanldle negatives, etc
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
